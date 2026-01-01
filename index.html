@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>عام جديد سعيد 2026</title>
 
-<!-- خط عربي فخم -->
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;900&display=swap" rel="stylesheet">
 
 <style>
@@ -27,7 +26,6 @@ body{
   color:white;
 }
 
-/* خلفية احتفالية متحركة */
 body::before{
   content:"";
   position:fixed;
@@ -48,7 +46,6 @@ body::before{
   padding:50px;
 }
 
-/* زر الترحيب */
 button{
   padding:20px 60px;
   font-size:clamp(20px,2vw,26px);
@@ -65,13 +62,11 @@ button:hover{
   box-shadow:0 0 55px rgba(255,215,0,1);
 }
 
-/* الرسالة */
 .message{
   display:none;
   margin-top:60px;
 }
 
-/* عنوان السنة */
 .title{
   font-weight:900;
   font-size:clamp(40px,5vw,80px);
@@ -86,13 +81,11 @@ button:hover{
   to{text-shadow:0 0 45px white;}
 }
 
-/* الجملة الكبيرة الواضحة */
 .text{
   margin-top:40px;
   font-size:clamp(30px,3.2vw,48px);
   font-weight:800;
   line-height:2.2;
-  color:#ffffff;
   background:rgba(0,0,0,0.4);
   padding:30px 40px;
   border-radius:25px;
@@ -102,7 +95,6 @@ button:hover{
     0 0 30px rgba(255,215,0,0.4);
 }
 
-/* المفرقعات */
 canvas{
   position:fixed;
   inset:0;
@@ -128,6 +120,7 @@ canvas{
 </div>
 
 <script>
+/* ================= المفرقعات ================= */
 const canvas=document.getElementById("confetti");
 const ctx=canvas.getContext("2d");
 
@@ -174,11 +167,69 @@ function draw(){
   requestAnimationFrame(draw);
 }
 
+/* ================= الصوت الاحترافي ================= */
+
+// الجملة
+const reminderText =
+"مرحبا بعائلة زياتي في هذه السهرة. نرجو من الجميع وضع الهواتف جانبا، والاستمتاع بوقتكم الجميل مع بعض.";
+
+// اختيار أفضل صوت عربي
+function getBestArabicVoice(){
+  const voices = speechSynthesis.getVoices();
+  return voices.find(v =>
+    v.lang.startsWith("ar") && v.name.toLowerCase().includes("google")
+  ) || voices.find(v => v.lang.startsWith("ar")) || voices[0];
+}
+
+// جرس خفيف قبل الكلام
+function playChime(){
+  const ctxAudio = new (window.AudioContext || window.webkitAudioContext)();
+  const osc = ctxAudio.createOscillator();
+  const gain = ctxAudio.createGain();
+
+  osc.type = "sine";
+  osc.frequency.value = 880;
+  gain.gain.value = 0.08;
+
+  osc.connect(gain);
+  gain.connect(ctxAudio.destination);
+
+  osc.start();
+  osc.stop(ctxAudio.currentTime + 0.4);
+}
+
+// نطق احترافي
+function speakReminder(){
+  playChime();
+
+  setTimeout(()=>{
+    const utter = new SpeechSynthesisUtterance(reminderText);
+    utter.lang = "ar-SA";
+    utter.voice = getBestArabicVoice();
+    utter.rate = 0.85;
+    utter.pitch = 0.95;
+    utter.volume = 1;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(utter);
+  },500);
+}
+
+let reminderInterval=null;
+
 function showMessage(){
   document.getElementById("msg").style.display="block";
   createConfetti();
   draw();
+
+  speakReminder();
+
+  if(!reminderInterval){
+    reminderInterval=setInterval(speakReminder,300000);
+  }
 }
+
+// تحميل الأصوات
+speechSynthesis.onvoiceschanged = ()=>{};
 </script>
 
 </body>
