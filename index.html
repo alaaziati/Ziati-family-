@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>عام جديد سعيد 2026</title>
 
-<!-- خط فخم -->
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<!-- خط عربي فخم -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;900&display=swap" rel="stylesheet">
 
 <style>
 *{
@@ -18,7 +18,7 @@
 
 body{
   min-height:100vh;
-  background: radial-gradient(circle at top,#2d0140,#000);
+  background:radial-gradient(circle at top,#2d0140,#000);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -27,54 +27,54 @@ body{
   color:white;
 }
 
-/* خلفية احتفالية */
+/* خلفية احتفالية متحركة */
 body::before{
   content:"";
   position:fixed;
   inset:0;
   background:url("https://i.imgur.com/8bKQX8L.png");
   opacity:0.07;
-  animation:bgMove 50s linear infinite;
+  animation:bgMove 60s linear infinite;
 }
 
 @keyframes bgMove{
   from{background-position:0 0;}
-  to{background-position:1200px 1200px;}
+  to{background-position:1500px 1500px;}
 }
 
 .container{
   z-index:2;
-  max-width:1000px;
-  padding:40px;
+  max-width:1200px;
+  padding:50px;
 }
 
-/* زر */
+/* زر الترحيب */
 button{
-  padding:18px 55px;
-  font-size:clamp(18px,2vw,24px);
+  padding:20px 60px;
+  font-size:clamp(20px,2vw,26px);
   border-radius:60px;
   border:none;
   cursor:pointer;
   background:linear-gradient(45deg,gold,orange);
-  box-shadow:0 0 30px rgba(255,215,0,.7);
-  transition:.3s;
+  box-shadow:0 0 35px rgba(255,215,0,.8);
+  transition:0.3s;
 }
 
 button:hover{
-  transform:scale(1.08);
-  box-shadow:0 0 45px rgba(255,215,0,.95);
+  transform:scale(1.1);
+  box-shadow:0 0 55px rgba(255,215,0,1);
 }
 
 /* الرسالة */
 .message{
   display:none;
-  margin-top:50px;
+  margin-top:60px;
 }
 
-/* العنوان */
+/* عنوان السنة */
 .title{
   font-weight:900;
-  font-size:clamp(36px,5vw,70px);
+  font-size:clamp(40px,5vw,80px);
   background:linear-gradient(90deg,gold,white,gold);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -82,15 +82,24 @@ button:hover{
 }
 
 @keyframes glow{
-  from{text-shadow:0 0 15px gold;}
-  to{text-shadow:0 0 35px white;}
+  from{text-shadow:0 0 20px gold;}
+  to{text-shadow:0 0 45px white;}
 }
 
-/* النص */
+/* الجملة الكبيرة الواضحة */
 .text{
-  margin-top:30px;
-  font-size:clamp(20px,2.2vw,30px);
-  line-height:1.9;
+  margin-top:40px;
+  font-size:clamp(30px,3.2vw,48px);
+  font-weight:800;
+  line-height:2.2;
+  color:#ffffff;
+  background:rgba(0,0,0,0.4);
+  padding:30px 40px;
+  border-radius:25px;
+  box-shadow:0 0 45px rgba(255,215,0,0.4);
+  text-shadow:
+    0 0 15px rgba(255,255,255,0.6),
+    0 0 30px rgba(255,215,0,0.4);
 }
 
 /* المفرقعات */
@@ -113,7 +122,7 @@ canvas{
     <div class="title">🎉 مبروك العام الجديد 2026 🎉</div>
     <div class="text">
       مرحبا بعائلة زياتي في هذه السهرة<br>
-      رجاء وضع الهواتف والاستمتاع بوقتكم مع بعض ❤️
+      رجاء وضع الهواتف 📵 والاستمتاع بوقتكم مع بعض ❤️
     </div>
   </div>
 </div>
@@ -132,13 +141,13 @@ resize();
 let confetti=[];
 
 function randomColor(){
-  return ["#FFD700","#FF5733","#33FFBD","#ffffff","#FF00FF"]
-  [Math.floor(Math.random()*5)];
+  const colors=["#FFD700","#FF5733","#33FFBD","#FFFFFF","#FF00FF"];
+  return colors[Math.floor(Math.random()*colors.length)];
 }
 
 function createConfetti(){
   confetti=[];
-  for(let i=0;i<300;i++){
+  for(let i=0;i<350;i++){
     confetti.push({
       x:Math.random()*canvas.width,
       y:Math.random()*canvas.height-canvas.height,
